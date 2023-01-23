@@ -1,13 +1,15 @@
 import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials"
 import { identityProvider } from "../../../lib/identityProvider";
 import { serviceProvider } from "../../../lib/serviceProvider";
 
 export default NextAuth({
-    providers: [{
+    providers: [
+        CredentialsProvider({
             id: "saml",
             name: "SAML",
+            credentials: {},
             authorize: async ({ samlBody }) => {
-                console.log("Entramos")
                 samlBody = JSON.parse(decodeURIComponent(samlBody));
 
                 const postAssert = (identityProvider, samlBody) =>
@@ -35,28 +37,21 @@ export default NextAuth({
                     return null;
                 }
             },
-        },
+        }),
     ],
     pages: {
         signIn: "/login",
     },
     callbacks: {
-        jwt: async (token, user) => {
-            console.log("entramos 1")
+        jwt: async ({ token, user }) => {
             if (user) {
-                return {
-                    user,
-                };
+                token.user=user
             }
-
-            return token;
+            return Promise.resolve(token);
         },
-        session: async (session, { user }) => {
-            console.log("entramos 2")
-            return {
-                ...session,
-                user,
-            };
+        session: async ({ session, token }) => {
+            session.user = token.user;
+            return Promise.resolve(session)
         },
     },
 });

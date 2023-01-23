@@ -1,4 +1,4 @@
-import {getSession, signIn, signOut} from "next-auth/react";
+import {getSession, useSession, signIn, signOut} from "next-auth/react";
 import Layout from "@/components/layout";
 import styles from "../styles/Home.module.css";
 
@@ -27,19 +27,16 @@ export default function Home({session}) {
 
                 <h3>User Information</h3>
                 <pre className={styles.code}>
-          <code>
-            {JSON.stringify(
-                (({attributes, ...info}) => info)(session.user),
-                null,
-                2
-            )}
-          </code>
-        </pre>
+                  <code>
+                    { JSON.stringify((({attributes, ...info}) => info)(session.user), null, 2) }
+                  </code>
+                </pre>
 
                 <h3>User Attributes</h3>
                 <pre className={styles.code}>
-          <code>{JSON.stringify(session.user.attributes, null, 2)}</code>
-        </pre>
+                  <code>{ JSON.stringify(session.user.attributes, null, 2) }</code>
+                </pre>
+
             </Layout>
         </>
     )
@@ -47,9 +44,8 @@ export default function Home({session}) {
 
 export const getServerSideProps = async (context) => {
     const session = await getSession(context);
-    console.log("Hello")
+
     if (!session) {
-        console.log("No hay sesión")
         return {
             redirect: {
                 permanent: false,
@@ -57,8 +53,6 @@ export const getServerSideProps = async (context) => {
             },
         };
     }
-
-    console.log("Habemus sesión")
 
     return {
         props: {session},
