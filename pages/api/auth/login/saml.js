@@ -2,10 +2,12 @@ import axios from "axios";
 import {identityProvider} from "../../../../lib/identityProvider";
 import {serviceProvider} from "../../../../lib/serviceProvider";
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 export default async (req, res) => {
     if (req.method === "POST") {
         const {data, headers} = await axios.get("/api/auth/csrf", {
-            baseURL: "http://localhost:3000",
+            baseURL: "https://localhost:8080",
         });
 
         const {csrfToken} = data;
