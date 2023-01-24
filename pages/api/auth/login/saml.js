@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 export default async (req, res) => {
     if (req.method === "POST") {
         const {data, headers} = await axios.get("/api/auth/csrf", {
-            baseURL: "https://localhost:8080",
+            baseURL: "http://localhost:3000",
         });
 
         const {csrfToken} = data;
