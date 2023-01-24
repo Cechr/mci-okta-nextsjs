@@ -13,8 +13,8 @@ app.prepare().then(() => {
     createServer(httpsOptions, (req, res) => {
         const parsedUrl = parse(req.url, true);
         handle(req, res, parsedUrl);
-    }).listen(8080, (err) => {
+    }).listen(8081, (err) => {
         if (err) throw err;
-        console.log("> Server started on https://localhost:8080");
+        console.log("> Server started on https://10.88.82.182:8081/mci");
     });
 });

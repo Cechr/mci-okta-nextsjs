@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 export default async (req, res) => {
     if (req.method === "POST") {
         const {data, headers} = await axios.get("/api/auth/csrf", {
-            baseURL: "https://localhost:8080",
+            baseURL: process.env.NEXT_PUBLIC_BASE_URL,
         });
 
         const {csrfToken} = data;
@@ -18,7 +18,7 @@ export default async (req, res) => {
         return res.send(
             `<html>
                 <body>
-                  <form action="/api/auth/callback/saml" method="POST">
+                  <form action="/mci/api/auth/callback/saml" method="POST">
                     <input type="hidden" name="csrfToken" defaultValue="${csrfToken}" value="${csrfToken}"/>
                     <input type="hidden" name="samlBody" defaultValue="${encodedSAMLBody}" value="${encodedSAMLBody}"/>
                   </form>

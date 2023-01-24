@@ -1,8 +1,11 @@
 import {getSession, useSession, signIn, signOut} from "next-auth/react";
 import Layout from "@/components/layout";
 import styles from "../styles/Home.module.css";
+import {data} from "autoprefixer";
 
-export default function Home({session}) {
+export default function Home({sesion}) {
+    const { data: session, status } = useSession()
+    //console.log(session, status)
     return (
         <>
             <Layout
@@ -28,13 +31,19 @@ export default function Home({session}) {
                 <h3>User Information</h3>
                 <pre className={styles.code}>
                   <code>
-                    { JSON.stringify((({attributes, ...info}) => info)(session.user), null, 2) }
+                    {
+                        JSON.stringify((({attributes, ...info}) => info)(session.user), null, 2)
+                    }
                   </code>
                 </pre>
 
                 <h3>User Attributes</h3>
                 <pre className={styles.code}>
-                  <code>{ JSON.stringify(session.user.attributes, null, 2) }</code>
+                  <code>
+                    {
+                        JSON.stringify(session.user.attributes, null, 2)
+                    }
+                  </code>
                 </pre>
 
             </Layout>
