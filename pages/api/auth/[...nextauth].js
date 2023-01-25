@@ -41,6 +41,7 @@ export default NextAuth({
     ],
     pages: {
         signIn: "/login",
+        //signOut: "https://www.google.com/"
     },
     callbacks: {
         redirect: async ({ url, baseUrl }) => {
@@ -68,5 +69,11 @@ export default NextAuth({
             session.user = token.user;
             return Promise.resolve(session)
         },
-    },
+    }/*,
+    events: {
+        signOut: async ({session, token}) => {
+            console.log("Entramos al signOut")
+
+        }
+    }*/
 });

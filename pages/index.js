@@ -1,7 +1,6 @@
 import {getSession, useSession, signIn, signOut} from "next-auth/react";
 import Layout from "@/components/layout";
 import styles from "../styles/Home.module.css";
-import {data} from "autoprefixer";
 
 export default function Home({sesion}) {
     const { data: session, status } = useSession()
@@ -19,8 +18,9 @@ export default function Home({sesion}) {
                 <div className={styles.grid}>
                     <button
                         onClick={() => {
-                            signOut();
-                            signIn();
+                            window.location.replace("https://auth-dev.gruposalinas.com.mx/login/signout")
+                            //signOut();
+                            //signIn();
                         }}
                         className={styles.card}
                     >
