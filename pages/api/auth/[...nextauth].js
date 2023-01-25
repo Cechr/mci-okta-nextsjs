@@ -44,17 +44,6 @@ export default NextAuth({
     },
     callbacks: {
         redirect: async ({ url, baseUrl }) => {
-            //console.log(process.env.NEXT_PUBLIC_BASE_URL)
-            //console.log("redirect - url ", url, "baseUrl ", baseUrl); // This is what I was checking
-
-            /*if(url.startsWith(baseUrl)) {
-                console.log("Entro1")
-                return url
-            } else if(url.startsWith("/")) {
-                console.log("Entro1")
-                return new URL(url, baseUrl).toString();
-            }*/
-
             baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
             return baseUrl;
         },
