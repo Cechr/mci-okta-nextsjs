@@ -1,10 +1,8 @@
-import {getSession, useSession, signIn, signOut} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import Layout from "@/components/layout";
 import styles from "../styles/Home.module.css";
 
-export default function Home({sesion}) {
-    const { data: session, status } = useSession()
-    //console.log(session, status)
+export default function Home({session}) {
     return (
         <>
             <Layout

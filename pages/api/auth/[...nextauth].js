@@ -41,7 +41,6 @@ export default NextAuth({
     ],
     pages: {
         signIn: "/login",
-        //signOut: "https://www.google.com/"
     },
     callbacks: {
         redirect: async ({ url, baseUrl }) => {
